@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class Util {
 
-    private static final String url = "jdbc:postgresql://localhost:5432/neobis";
+    private static final String url = "jdbc:postgresql://localhost:5433/neobis";
     private static final String login = "postgres";
     private static final String password = "postgres";
     public static Connection connection(){
