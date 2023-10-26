@@ -2,7 +2,7 @@
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
-.idea/out/
+.out/
 *.iws
 *.iml
 *.ipr
