@@ -10,7 +10,6 @@ import java.util.List;
 public class CustomerDaoImpl implements CustomerDao {
     public CustomerDaoImpl() {
     }
-
     @Override
     public void createCustomersTable() throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS customers (\n" +
@@ -59,7 +58,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public void deleteCustomerById(Long id) throws SQLException {
-        String sql = "DELETE FROM customers WHERE id = ?";
+        String sql = "DELETE FROM customers WHERE id = ?;";
         try(Connection connection = Util.connection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
             preparedStatement.setLong(1, id);
@@ -74,7 +73,7 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public Customer getCustomerById(Long id) throws SQLException {
         Customer customer = null;
-        String sql = "SELECT name, email FROM customers WHERE id = ?";
+        String sql = "SELECT name, email FROM customers WHERE id = ?;";
         try (Connection connection = Util.connection();
         PreparedStatement preparedStatement = connection.prepareStatement(sql)){
         preparedStatement.setLong(1, id);

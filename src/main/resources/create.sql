@@ -25,6 +25,11 @@ CREATE TABLE IF NOT EXISTS orders(
 	
 SELECT * FROM orders;
 
+DROP TABLE customers;
+INSERT INTO customers (name, email) VALUES(?, ?);
+DELETE FROM customers WHERE id = ?;
+SELECT name, email FROM customers WHERE id = ?;
+
 
 
 
