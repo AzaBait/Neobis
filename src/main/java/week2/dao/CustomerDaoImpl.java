@@ -4,6 +4,7 @@ import week2.model.Customer;
 import week2.util.Util;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerDaoImpl implements CustomerDao {
@@ -93,6 +94,21 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public List<Customer> getAllCustomers() throws SQLException {
-        return null;
+            List<Customer> customers = new ArrayList<>();
+            String sql = "SELECT * FROM customers";
+            try (Connection connection = Util.connection();
+            Statement statement = connection.createStatement()){
+                ResultSet resultSet = statement.executeQuery(sql);
+                while (resultSet.next()){
+                    Customer customer = new Customer();
+                  customer.setName(resultSet.getString("name"));
+                    customer.setEmail(resultSet.getString("email"));
+                    customers.add(customer);
+                }
+                System.out.println(customers.size() + " customers found: " + customers);
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+            return customers;
     }
 }

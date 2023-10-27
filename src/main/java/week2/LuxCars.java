@@ -14,6 +14,7 @@ public class LuxCars {
 //        cdao.createCustomersTable();
 //        cdao.saveCustomer("aza", "aza@mail.com");
  //       cdao.dropCustomersTable();
-        cdao.getCustomerById(1L);
+//        cdao.getCustomerById(1L);
+        cdao.getAllCustomers();
     }
 }
