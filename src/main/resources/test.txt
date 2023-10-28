@@ -1,0 +1,10 @@
+test project 2
+
+
+--Скачиваем и настраиваем PostgreSql(скрипт со созданием бд в папке resources/create.sql)
+--скрипт gj созданию бд и нужных таблиц  в папке resources/create.sql
+--Подключаем JDBC из Maven repository в pom.xml и соединяем проект с БД.
+--В папке week2/util/Util: описан метод соединения с базой, необходимо прописать в url, user и password свои данные.
+--В папке dao: описаны методы CRUD
+--В LuxCars(main method) описаны CRUD методы
+--Проверить CRUD методы (создание, чтение, изменение и удаление) и посмотреть результаты в pgAdmin4

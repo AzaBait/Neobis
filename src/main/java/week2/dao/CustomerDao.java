@@ -9,7 +9,8 @@ public interface CustomerDao {
 
     void createCustomersTable() throws SQLException;
     void dropCustomersTable() throws SQLException;
-    void saveCustomer(String name, String email) throws SQLException;
+    void saveCustomer(String name, String surname, String email, String phone) throws SQLException;
+    void updateCustomer(Long id, String name, String surname, String email, String phone) throws SQLException;
     void deleteCustomerById(Long id) throws SQLException;
     Customer getCustomerById(Long id) throws SQLException;
     List<Customer> getAllCustomers() throws SQLException;

@@ -6,14 +6,14 @@ public class Order {
     private Long id;
     private Long customerId;
     private Long carId;
-    private int totalPrice;
+    private double totalPrice;
     private LocalDateTime orderDate;
 
-    public int getTotalPrice() {
+    public double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(int totalPrice) {
+    public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
@@ -62,9 +62,8 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", customerId=" + customerId +
+        return "\nOrder{" +
+                " customerId=" + customerId +
                 ", carId=" + carId +
                 ", totalPrice=" + totalPrice +
                 ", orderDate=" + orderDate +

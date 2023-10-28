@@ -3,15 +3,37 @@ package week2.model;
 public class Customer {
     private Long id;
     private String name;
+    private String surname;
     private String email;
+    private String phone;
+
 
 
     public Customer() {
     }
-    public Customer(Long id, String name, String email) {
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Customer(Long id, String name, String surname, String email, String phone) {
         this.id = id;
         this.name = name;
+        this.surname = surname;
         this.email = email;
+        this.phone = phone;
     }
     public Long getId() {
         return id;
@@ -32,11 +54,14 @@ public class Customer {
     public void setEmail(String email) {
         this.email = email;
     }
+
     @Override
     public String toString() {
-        return "Customer{" +
-                " 'name='" + name + '\'' +
+        return "\nCustomer{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
                 '}';
     }
 }

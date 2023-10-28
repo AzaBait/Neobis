@@ -13,12 +13,15 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public void createCustomersTable() throws SQLException {
         String sql = "CREATE TABLE IF NOT EXISTS customers (\n" +
-                "id SERIAL PRIMARY KEY NOT NULL,\n" +
+                "id BIGSERIAL PRIMARY KEY NOT NULL,\n" +
                 "\tname VARCHAR(100) NOT NULL,\n" +
-                "\temail VARCHAR(100) NOT NULL);";
+                "\tsurname VARCHAR(100) NOT NULL,\n" +
+                "\temail VARCHAR(100) NOT NULL,\n" +
+                "\tphone VARCHAR(100) NOT NULL);";
         try(Connection connection = Util.connection();
             Statement statement = connection.createStatement()) {
                     statement.executeUpdate(sql);
+            System.out.println("Table customers created!");
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -30,19 +33,22 @@ public class CustomerDaoImpl implements CustomerDao {
         try(Connection connection = Util.connection();
             Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
+            System.out.println("Table customers is dropped");
         }catch (SQLException e){
             e.printStackTrace();
         }
     }
 
     @Override
-    public void saveCustomer(String name, String email) throws SQLException {
-        String sql = "INSERT INTO customers (name, email) VALUES(?, ?);";
+    public void saveCustomer(String name, String surname, String email, String phone) throws SQLException {
+        String sql = "INSERT INTO customers (name, surname, email, phone) VALUES(?, ?, ?, ?);";
         Long customerId = null;
         try (Connection connection = Util.connection();
         PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             preparedStatement.setString(1, name);
-            preparedStatement.setString(2, email);
+            preparedStatement.setString(2, surname);
+            preparedStatement.setString(3, email);
+            preparedStatement.setString(4, phone);
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()){
@@ -51,6 +57,22 @@ public class CustomerDaoImpl implements CustomerDao {
             }else{
                 throw new SQLException("Save customer failed!");
             }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    @Override
+    public void updateCustomer(Long id, String name, String surname, String email, String phone) throws SQLException {
+        String sql = "UPDATE customers SET name = ?, surname = ?, email = ?, phone = ? WHERE customers.id = ?;";
+        try(Connection connection = Util.connection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, surname);
+            preparedStatement.setString(3, email);
+            preparedStatement.setString(4, phone);
+            preparedStatement.setLong(5, id);
+            preparedStatement.executeUpdate();
+            System.out.println("Customer with id " + id + " updated!");
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -83,6 +105,8 @@ public class CustomerDaoImpl implements CustomerDao {
             customer.setName(resultSet.getString("name"));
             customer.setEmail(resultSet.getString("email"));
             System.out.println(customer);
+        }else {
+            throw new SQLException("Customer with ID " + id + " not found!");
         }
         }catch (SQLException e){
             e.printStackTrace();
@@ -90,7 +114,6 @@ public class CustomerDaoImpl implements CustomerDao {
 
         return  customer;
     }
-
     @Override
     public List<Customer> getAllCustomers() throws SQLException {
             List<Customer> customers = new ArrayList<>();
@@ -102,6 +125,8 @@ public class CustomerDaoImpl implements CustomerDao {
                     Customer customer = new Customer();
                   customer.setName(resultSet.getString("name"));
                     customer.setEmail(resultSet.getString("email"));
+                    customer.setSurname(resultSet.getString("surname"));
+                    customer.setPhone(resultSet.getString("phone"));
                     customers.add(customer);
                 }
                 System.out.println(customers.size() + " customers found: " + customers);
