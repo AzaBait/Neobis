@@ -1,27 +1,17 @@
 package week2.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Order {
     private Long id;
-    private Long customerId;
-    private Long carId;
-    private double totalPrice;
+    private List<OrderDetails> orderDetailsL;
+    private Long customerID;
     private LocalDateTime orderDate;
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public Order(Long id, Long customerId, Long carId, int totalPrice, LocalDateTime orderDate) {
+    public Order(Long id, List<OrderDetails> orderDetailsL, Long customerID, LocalDateTime orderDate) {
         this.id = id;
-        this.customerId = customerId;
-        this.carId = carId;
-        this.totalPrice = totalPrice;
+        this.orderDetailsL = orderDetailsL;
+        this.customerID = customerID;
         this.orderDate = orderDate;
     }
 
@@ -36,20 +26,19 @@ public class Order {
         this.id = id;
     }
 
-    public Long getCustomerId() {
-        return customerId;
+    public List<OrderDetails> getOrderDetailsL() {
+        return orderDetailsL;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setOrderDetailsL(List<OrderDetails> orderDetailsL) {
+        this.orderDetailsL = orderDetailsL;
+    }
+    public Long getCustomerID() {
+        return customerID;
     }
 
-    public Long getCarId() {
-        return carId;
-    }
-
-    public void setCarId(Long carId) {
-        this.carId = carId;
+    public void setCustomerID(Long customerID) {
+        this.customerID = customerID;
     }
 
     public LocalDateTime getOrderDate() {
@@ -62,10 +51,10 @@ public class Order {
 
     @Override
     public String toString() {
-        return "\nOrder{" +
-                " customerId=" + customerId +
-                ", carId=" + carId +
-                ", totalPrice=" + totalPrice +
+        return "Order{" +
+                "id=" + id +
+                ", orderDetailsL=" + orderDetailsL +
+                ", customerID=" + customerID +
                 ", orderDate=" + orderDate +
                 '}';
     }

@@ -11,8 +11,8 @@ public interface OrderDao {
 
     void createOrdersTable() throws SQLException;
     void dropOrdersTable() throws SQLException;
-    void saveOrder(LocalDateTime orderDate, double totalPrice, Long customerId, Long carId) throws SQLException;
-    void updateOrder(Long id, LocalDateTime orderDate,double totalPrice, Long customerId, Long carId) throws SQLException;
+    void saveOrder(LocalDateTime orderDate, Long customerId) throws SQLException;
+    void updateOrder(Long id, LocalDateTime orderDate, Long customerId) throws SQLException;
     void deleteOrderById(Long id) throws SQLException;
     Order getOrderById(Long id) throws SQLException;
     List<Order> getAllOrders() throws SQLException;

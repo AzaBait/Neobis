@@ -21,13 +21,23 @@ SELECT * FROM cars;
 CREATE TABLE IF NOT EXISTS orders(
  id BIGSERIAL PRIMARY KEY NOT NULL,
 	order_date TIMESTAMP DEFAULT NOW() NOT NULL,
-	total_price DOUBLE PRECISION NOT NULL,
 	customer_id BIGINT NOT NULL,
-	car_id BIGINT NOT NULL,
-	CONSTRAINT fk_customer_id FOREIGN KEY (customer_id) REFERENCES customers(id),
-	CONSTRAINT fk_car_id FOREIGN KEY (car_id) REFERENCES cars(id));
+	CONSTRAINT fk_customer_id FOREIGN KEY (customer_id) REFERENCES customers(id));
+
 	
 SELECT * FROM orders;
+
+CREATE TABLE orderDetails (
+    id SERIAL PRIMARY KEY NOT NULL,
+    order_id bigint NOT NULL,
+    car_id bigint NOT NULL,
+    total_price double precision,
+    order_date timestamp DEFAULT NOW() NOT NULL,
+	CONSTRAINT fk_order_id FOREIGN KEY (order_id) REFERENCES orders(id),
+	CONSTRAINT fk_car_id FOREIGN KEY (car_id) REFERENCES cars(id)
+);
+
+SELECT * FROM orderDetails;
 
 DROP TABLE customers;
 INSERT INTO customers (name, email) VALUES(?, ?);
